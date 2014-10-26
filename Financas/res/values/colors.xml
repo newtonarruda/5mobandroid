@@ -5,5 +5,7 @@
     <color name="titulo_text">#ffffffff</color>
     <color name="foreground">#ff000000</color>
     <color name="background">#ff000000</color>
-
+    <color name="text_color">#FFA319</color>
+	<color name="white">#ffffff</color>
+    
 </resources>

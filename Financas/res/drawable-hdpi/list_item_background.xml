@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+    	  android:drawable="@drawable/item_background_focused"
+          android:state_pressed="true" />
+    
+    <item  
+     	  android:drawable="@drawable/item_background_white" />
+    
+    <item 
+        android:drawable="@drawable/item_background_blue" />
+    
+    <item 
+        android:drawable="@drawable/item_background_green" />
+    
+    <item 
+        android:drawable="@drawable/item_background_red" />
+    
+    <item 
+        android:drawable="@drawable/item_background_black" />
+    
+</selector>
