@@ -11,12 +11,23 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/tvLogin"
+            android:id="@+id/tvNovoUsuario"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/LOGIN"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/NOVO_USUARIO"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/etNome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:hint="@string/txtEmptyNome" >
+
+            <requestFocus />
+        </EditText>
 
         <EditText
             android:id="@+id/etUsuario"
@@ -24,10 +35,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="@string/txtEmptyUsuario" >
-
-            <requestFocus />
-        </EditText>
+            android:hint="@string/txtEmptyUsuario" />
 
         <EditText
             android:id="@+id/etSenha"
@@ -38,21 +46,33 @@
             android:hint="@string/txtEmptySenha"
             android:inputType="numberPassword" />
 
-        <Button
-            android:id="@+id/btEntrar"
+        <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/btEntrar"
-            android:textAlignment="center" />
+            android:hint="@string/txtEmptyEmail" 
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/etTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:hint="@string/txtEmptyTelefone"
+            android:inputType="number|phone" />
 
         <Button
-            android:id="@+id/btNovoUsuario"
-            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btCadastrarNovoUsuario"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btNovoUsuario" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/btCadastrarNovoUsuario"
+            android:textAlignment="center" />
+
     </LinearLayout>
 
 </RelativeLayout>

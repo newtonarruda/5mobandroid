@@ -1,11 +1,13 @@
 package br.com.fiap.financas.view;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ public class MenuActivity extends Activity {
 	ImageView ivFinancas;
 	ImageView ivExcluirDados;
 	ImageView ivInformacoes;
+	
+	Button btInformacoesVoltar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class MenuActivity extends Activity {
 
 		ivInformacoes = (ImageView) findViewById(R.id.ivInformacoes);
 		ivInformacoes.setOnClickListener(new ClickerInformacoes());
+
+		btInformacoesVoltar = (Button) findViewById(R.id.btInformacoesVoltar);
+		btInformacoesVoltar.setOnClickListener(new ClickerInformacoesVoltar());
 
 		Intent intentLoginToMenu = getIntent();
 
@@ -138,11 +145,33 @@ public class MenuActivity extends Activity {
 			switch (view.getId()) {
 
 			case R.id.ivInformacoes:
-				trace("Abre Informações");
+				exibeDialogoInformacoes();
+				
+				//trace("Abre Informações");
 			}
 		}
 	}
 
+	private class ClickerInformacoesVoltar implements OnClickListener {
+
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+
+			case R.id.ivInformacoes:
+				exibeDialogoInformacoes();
+				
+				//trace("Abre Informações");
+			}
+		}
+	}
+
+	public void exibeDialogoInformacoes(){
+		Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.dialogo_informacoes);
+		dialog.show();
+	}
+	
 	public void toast(String msg) {
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
