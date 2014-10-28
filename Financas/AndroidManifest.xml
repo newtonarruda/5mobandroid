@@ -38,6 +38,22 @@
             android:name=".view.CalendarioActivity"
             android:label="@string/titulo_activity_calendario" >
         </activity>
-        </application>
+        <activity
+            android:name=".view.GanhosActivity"
+            android:label="@string/title_activity_ganhos" >
+        </activity>
+        <activity
+            android:name=".view.GastosActivity"
+            android:label="@string/title_activity_gastos" >
+        </activity>
+        <activity
+            android:name=".view.TotaisActivity"
+            android:label="@string/title_activity_totais" >
+        </activity>
+        <activity
+            android:name=".view.FinancasActivity"
+            android:label="@string/title_activity_financas" >
+        </activity>
+    </application>
 
 </manifest>

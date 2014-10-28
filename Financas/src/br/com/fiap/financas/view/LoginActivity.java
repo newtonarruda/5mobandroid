@@ -39,15 +39,16 @@ public class LoginActivity extends Activity {
 			btNovoUsuario = (Button) findViewById(R.id.btNovoUsuario);
 			btNovoUsuario.setOnClickListener(new ClickerEntrar());
 
-			if(dao == null){
-				dao = new UsuarioDAO(this);	
+			if (dao == null) {
+				dao = new UsuarioDAO(this);
 			}
 
-			if(dao.isOpenDb()){
+			if (dao.isOpenDb()) {
 				executaCargaInicial();
-			}else{
-				Toast.makeText(getBaseContext(), "Banco de dados não foi inicializado!!!", Toast.LENGTH_LONG)
-				.show();
+			} else {
+				Toast.makeText(getBaseContext(),
+						"Banco de dados não foi inicializado!!!",
+						Toast.LENGTH_LONG).show();
 			}
 
 		} catch (Exception e) {
@@ -58,7 +59,8 @@ public class LoginActivity extends Activity {
 	}
 
 	private void executaCargaInicial() {
-		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", "", 0d, true);
+		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", "",
+				0d, true);
 
 		if (dao.selectLogin(admin) == null) {
 			dao.insert(admin);
@@ -126,9 +128,11 @@ public class LoginActivity extends Activity {
 							+ MAX_TENTATIVAS_LOGIN);
 				}
 				break;
-				
+
 			case R.id.btNovoUsuario:
-				Usuario usuario = new Usuario(null, null, etUsuario.getText().toString(), etSenha.getText().toString(), null, null, true);
+				Usuario usuario = new Usuario(null, null, etUsuario.getText()
+						.toString(), etSenha.getText().toString(), null, null,
+						true);
 
 				Intent intentLoginToNovoUsuario = new Intent(
 						LoginActivity.this, NovoUsuarioActivity.class);
@@ -141,27 +145,27 @@ public class LoginActivity extends Activity {
 				startActivity(intentLoginToNovoUsuario);
 
 				break;
-				
-				// Intent intentLoginToMenu = new Intent(LoginActivity.this,
-				// MenuActivity.class);
-				//
-				// Bundle myData = new Bundle();
-				//
-				// // TODO: Implementar busca do usuário na base do SQLite
-				// Usuario usuario = new Usuario(1, "Newton Arruda", etUsuario
-				// .getText().toString(), etSenha.getText().toString(),
-				// true);
-				//
-				// // TODO: Implementar regra de validação do usuário
-				// if ("arruda".equalsIgnoreCase(usuario.getUsuario())
-				// && usuario.isFlagAtivo()) {
-				//
-				// myData.putSerializable("usuario", usuario);
-				// intentLoginToMenu.putExtras(myData);
-				// startActivity(intentLoginToMenu);
-				// } else {
-				// trace("O usuário não pode logar no sistema");
-				// }
+
+			// Intent intentLoginToMenu = new Intent(LoginActivity.this,
+			// MenuActivity.class);
+			//
+			// Bundle myData = new Bundle();
+			//
+			// // TODO: Implementar busca do usuário na base do SQLite
+			// Usuario usuario = new Usuario(1, "Newton Arruda", etUsuario
+			// .getText().toString(), etSenha.getText().toString(),
+			// true);
+			//
+			// // TODO: Implementar regra de validação do usuário
+			// if ("arruda".equalsIgnoreCase(usuario.getUsuario())
+			// && usuario.isFlagAtivo()) {
+			//
+			// myData.putSerializable("usuario", usuario);
+			// intentLoginToMenu.putExtras(myData);
+			// startActivity(intentLoginToMenu);
+			// } else {
+			// trace("O usuário não pode logar no sistema");
+			// }
 
 			}
 		}

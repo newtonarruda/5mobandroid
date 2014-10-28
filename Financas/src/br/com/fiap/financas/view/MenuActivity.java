@@ -25,12 +25,12 @@ public class MenuActivity extends Activity {
 	ImageView ivExcluirDados;
 	ImageView ivInformacoes;
 	Context context;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
-		
+
 		ivCalendario = (ImageView) findViewById(R.id.ivCalendario);
 		ivCalendario.setOnClickListener(new ClickerCalendario());
 
@@ -67,8 +67,9 @@ public class MenuActivity extends Activity {
 		@Override
 		public void onClick(View view) {
 			// Tela CalendarioActivity
-			Intent intent = new Intent( getBaseContext( ), CalendarioActivity.class ) ;
-			startActivity( intent ) ;
+			Intent intent = new Intent(getBaseContext(),
+					CalendarioActivity.class);
+			startActivity(intent);
 		}
 	}
 
@@ -112,11 +113,8 @@ public class MenuActivity extends Activity {
 
 		@Override
 		public void onClick(View view) {
-			switch (view.getId()) {
-
-			case R.id.ivFinancas:
-				trace("Abre Finanças");
-			}
+			Intent intent = new Intent(getBaseContext(), FinancasActivity.class);
+			startActivity(intent);
 		}
 	}
 
@@ -139,12 +137,10 @@ public class MenuActivity extends Activity {
 			// Exibir caixa de diálogo com os integrantes do grupo
 			AlertDialog.Builder build = new AlertDialog.Builder(context);
 			build.setTitle("");
-			build.setMessage("Integrantes do Projeto:\n" + 
-					"Caio Waquil\n" +
-					"Mauricio Frasson\n" +
-					"Newton Arruda");
+			build.setMessage("Integrantes do Projeto:\n" + "Caio Waquil\n"
+					+ "Mauricio Frasson\n" + "Newton Arruda");
 			build.setIcon(R.drawable.money_bag);
-			build.show( );
+			build.show();
 		}
 	}
 

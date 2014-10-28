@@ -29,5 +29,19 @@
     <string name="rodape">Informações de rodapé</string>
     <string name="titulo_activity_menu">Menu Finanças</string>
     <string name="titulo_activity_calendario">Calendário</string>
-    
+    <string name="ganhos">Ganhos</string>
+    <string name="gastos">Gastos</string>
+    <string name="totais">Totais</string>
+    <string name="title_activity_ganhos">Ganhos</string>
+    <string name="title_activity_gastos">Gastos</string>
+    <string name="title_activity_totais">Totais</string>
+    <string name="Total">Total:</string>
+    <string name="Saldo">Saldo:</string>
+    <string name="xxx">xxx</string>
+    <string name="TotalGanhos">Total ganhos:</string>
+    <string name="TotalGastos">Total gastos:</string>
+    <string name="abreParentesis">(</string>
+    <string name="fechaParentesis">)</string>
+    <string name="title_activity_financas">Financas</string>
+
 </resources>
