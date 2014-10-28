@@ -9,7 +9,6 @@
     <string name="txtEmptyUsuario">Usuário</string>
     <string name="separador">______________________</string>
     <string name="LOGIN">LOGIN</string>
-    <string name="titulo_activity_menu">Menu Finanças</string>
     <string name="calendario">Calendário</string>
     <string name="backup">Backup</string>
     <string name="graficos">Gráficos</string>
@@ -18,5 +17,7 @@
     <string name="excluir_dados">Excluir Dados</string>
     <string name="informacoes">Informações</string>
     <string name="rodape">Informações de rodapé</string>
+    <string name="titulo_activity_menu">Menu Finanças</string>
+    <string name="titulo_activity_calendario">Calendário</string>
     
 </resources>

@@ -33,6 +33,10 @@
             android:name=".view.MenuActivity"
             android:label="@string/titulo_activity_menu" >
         </activity>
+        <activity
+            android:name=".view.CalendarioActivity"
+            android:label="@string/titulo_activity_calendario" >
+        </activity>
         </application>
 
 </manifest>

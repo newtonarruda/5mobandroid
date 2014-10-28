@@ -29,7 +29,7 @@ public class SplashScreenActivity extends Activity {
 					synchronized (this)
 					{
 						// Aguarda 4 segundos ou sai quando a tela for tocada
-						wait( 4000 ) ;
+						wait( 5000 ) ;
 						clicouTela = true ;
 					}
 				}
