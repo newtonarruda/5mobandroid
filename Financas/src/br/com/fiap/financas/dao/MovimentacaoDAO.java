@@ -82,7 +82,7 @@ public class MovimentacaoDAO extends DataSource {
 								.getColumnIndex("id_origem")), null),
 						new Usuario(cursor.getInt(cursor
 								.getColumnIndex("id_usuario")), null, null,
-								null, null, null, true)));
+								null, true)));
 			} while (cursor.moveToNext());
 		}
 		if (cursor != null && !cursor.isClosed()) {

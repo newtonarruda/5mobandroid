@@ -18,10 +18,9 @@ public class LoginActivity extends Activity {
 	EditText etUsuario;
 	EditText etSenha;
 	Button btLogin;
-	Button btNovoUsuario;
 
 	UsuarioDAO dao;
-	Integer loginTentativas = 0;
+	Integer loginTentativas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +35,10 @@ public class LoginActivity extends Activity {
 			btLogin = (Button) findViewById(R.id.btEntrar);
 			btLogin.setOnClickListener(new ClickerEntrar());
 
-			btNovoUsuario = (Button) findViewById(R.id.btNovoUsuario);
-			btNovoUsuario.setOnClickListener(new ClickerEntrar());
+			dao = new UsuarioDAO(this);
+			loginTentativas = 1;
 
-			if(dao == null){
-				dao = new UsuarioDAO(this);	
-			}
-
-			if(dao.isOpenDb()){
-				executaCargaInicial();
-			}else{
-				Toast.makeText(getBaseContext(), "Banco de dados não foi inicializado!!!", Toast.LENGTH_LONG)
-				.show();
-			}
+			executaCargaInicial();
 
 		} catch (Exception e) {
 			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG)
@@ -58,7 +48,7 @@ public class LoginActivity extends Activity {
 	}
 
 	private void executaCargaInicial() {
-		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", "", 0d, true);
+		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", true);
 
 		if (dao.selectLogin(admin) == null) {
 			dao.insert(admin);
@@ -97,7 +87,7 @@ public class LoginActivity extends Activity {
 				if (loginTentativas <= MAX_TENTATIVAS_LOGIN) {
 					Usuario usuario = dao.selectLogin(new Usuario(null, null,
 							etUsuario.getText().toString(), etSenha.getText()
-									.toString(), null, null, false));
+									.toString(), false));
 
 					loginTentativas++;
 
@@ -119,29 +109,14 @@ public class LoginActivity extends Activity {
 						}
 
 					} else {
+
 						trace("Usuário ou senha inválidos.");
 					}
 				} else {
 					trace("O usuário não pode logar no sistema pois atingiu a quantidade maxima de tentativa: "
 							+ MAX_TENTATIVAS_LOGIN);
 				}
-				break;
-				
-			case R.id.btNovoUsuario:
-				Usuario usuario = new Usuario(null, null, etUsuario.getText().toString(), etSenha.getText().toString(), null, null, true);
 
-				Intent intentLoginToNovoUsuario = new Intent(
-						LoginActivity.this, NovoUsuarioActivity.class);
-
-				Bundle myData = new Bundle();
-
-				myData.putSerializable("usuario", usuario);
-				intentLoginToNovoUsuario.putExtras(myData);
-
-				startActivity(intentLoginToNovoUsuario);
-
-				break;
-				
 				// Intent intentLoginToMenu = new Intent(LoginActivity.this,
 				// MenuActivity.class);
 				//

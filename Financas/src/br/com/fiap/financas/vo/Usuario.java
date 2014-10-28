@@ -12,19 +12,15 @@ public class Usuario implements Serializable {
 	private String nome;
 	private String usuario;
 	private String senha;
-	private String email;
-	private Double telefone;
 	private boolean flagAtivo;
 
-	public Usuario(Integer idUsuario, String nome, String usuario,
-			String senha, String email, Double telefone, boolean flagAtivo) {
+	public Usuario(Integer idUsuario, String nome, String usuario, String senha,
+			boolean flagAtivo) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nome = nome;
 		this.usuario = usuario;
 		this.senha = senha;
-		this.email = email;
-		this.telefone = telefone;
 		this.flagAtivo = flagAtivo;
 	}
 
@@ -66,22 +62,6 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Double getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(Double telefone) {
-		this.telefone = telefone;
 	}
 
 }

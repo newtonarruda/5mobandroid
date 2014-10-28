@@ -1,17 +1,16 @@
 package br.com.fiap.financas.view;
 
+import br.com.fiap.financas.R;
+import br.com.fiap.financas.view.LoginActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Toast;
-import br.com.fiap.financas.R;
 
 public class SplashScreenActivity extends Activity {
 
-	private Thread threadSplash;
-	private boolean clicouTela = false;
+	private Thread threadSplash ;
+	private boolean clicouTela = false ;
 
 	@Override
 	public void onCreate( Bundle savedInstanceState )
@@ -20,65 +19,64 @@ public class SplashScreenActivity extends Activity {
 		setContentView( R.layout.activity_splashscreen ) ;
 
 //		Cria a thread para exibir a tela de splash
-		threadSplash = new Thread(){
-			
+		threadSplash = new Thread( )
+		{
 			@Override
-			public void run(){
-				try{
-					synchronized(this){
+			public void run( )
+			{
+				try
+				{
+					synchronized (this)
+					{
 						// Aguarda 4 segundos ou sai quando a tela for tocada
-						wait(4000) ;
-						clicouTela = true;
+						wait( 4000 ) ;
+						clicouTela = true ;
 					}
-				}catch (InterruptedException ex){
+				}
+				catch (InterruptedException ex)
+				{
 //					TODO Log: Implementar log de sistema em arquivo
 				}
 
-				if(clicouTela){
+				if (clicouTela)
+				{
 					// se clicou na tela fecha a splash screen
-					finish();
+					finish( ) ;
 
 					// se clicou na tela inicia a activity de Login
-					Intent i = new Intent();
-					i.setClass(SplashScreenActivity.this, LoginActivity.class);
-					startActivity(i) ;
+					Intent i = new Intent( ) ;
+					i.setClass( SplashScreenActivity.this, LoginActivity.class ) ;
+					startActivity( i ) ;
 				}
 			}
-		};
-		Log.w("===>SplashScreenActivity", "Cria thead threadSplash");
+		} ;
 
-		Log.w("===>SplashScreenActivity", "threadSplash.start");
-		threadSplash.start();
-		
+		threadSplash.start( ) ;
 	}
 
 	@Override
-	public void onPause(){
-		super.onPause();
+	public void onPause( )
+	{
+		super.onPause( ) ;
 
 //		finaliza a thread quando o botão voltar for clicado, o sistema finaliza a thread Splash 
-		threadSplash.interrupt();
+		threadSplash.interrupt( ) ;
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event){
-		if (event.getAction( ) == MotionEvent.ACTION_DOWN){
-			synchronized (threadSplash){
-				clicouTela = true;
+	public boolean onTouchEvent( MotionEvent event )
+	{
+		if (event.getAction( ) == MotionEvent.ACTION_DOWN)
+		{
+			synchronized (threadSplash)
+			{
+				clicouTela = true ;
 
 //				encerra o tempo de espera da tela de Splash
-				threadSplash.notifyAll();
+				threadSplash.notifyAll( ) ;
 			}
 		}
-		return true;
-	}
-
-	public void toast(String msg) {
-		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-	}
-
-	private void trace(String msg) {
-		toast(msg);
+		return true ;
 	}
 
 }
