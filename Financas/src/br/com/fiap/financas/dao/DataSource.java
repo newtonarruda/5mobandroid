@@ -1,5 +1,6 @@
 package br.com.fiap.financas.dao;
 
+import br.com.fiap.financas.vo.MensagemBean;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -47,6 +48,11 @@ public class DataSource extends SQLiteOpenHelper {
 
 	}
 
+	public void insertSmsIntoDatabase(MensagemBean message)
+	{
+		
+	}
+	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.w("Finanças",

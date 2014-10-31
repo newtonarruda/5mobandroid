@@ -1,8 +1,10 @@
 package br.com.fiap.financas.view;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,6 +17,9 @@ import br.com.fiap.financas.vo.Usuario;
 public class LoginActivity extends Activity {
 	private int MAX_TENTATIVAS_LOGIN = 3;
 
+	private static final int SENT = 1;
+	private static final short SMS_PORT = 8998;
+	
 	EditText etUsuario;
 	EditText etSenha;
 	Button btLogin;
@@ -51,6 +56,10 @@ public class LoginActivity extends Activity {
 						Toast.LENGTH_LONG).show();
 			}
 
+			// Usuário conectado, logo envia SMS (para manter o broadcast ativo)
+			// TODO descobrir uma forma de enviar Sms com o telefone propio
+			senderSms("123456789");
+			
 		} catch (Exception e) {
 			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG)
 					.show();
@@ -67,6 +76,14 @@ public class LoginActivity extends Activity {
 			trace("A carga inicial foi executada com sucesso!");
 		}
 
+	}
+
+	private void senderSms( String phoneNumber ) {
+		PendingIntent sent = this.createPendingResult(SENT, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
+		String messageText = ""; // TODO pegar o saldo da aplicação financeira
+
+		SmsManager smsManager = SmsManager.getDefault();
+		smsManager.sendDataMessage(phoneNumber.toString(), null, SMS_PORT, messageText.getBytes(), sent, null);
 	}
 
 	// @Override
