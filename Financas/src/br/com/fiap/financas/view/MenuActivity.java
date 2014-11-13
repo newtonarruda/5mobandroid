@@ -1,7 +1,11 @@
 package br.com.fiap.financas.view;
 
+import java.util.GregorianCalendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.fiap.financas.R;
+import br.com.fiap.financas.receiver.SmsReceiver;
 import br.com.fiap.financas.vo.Usuario;
 
 public class MenuActivity extends Activity {
@@ -152,6 +157,22 @@ public class MenuActivity extends Activity {
 		toast(msg);
 	}
 
+	/*
+	 * Método que irá disparar o SMS no horario pré-determinado,
+	 * Regra: Todos os dias as 8h 
+	 */
+	public void scheduleAlarmSMS(View v)
+	{
+		Long time = new GregorianCalendar().getTimeInMillis();
+		
+		Intent intentAlarm = new Intent(this, SmsReceiver.class);
+		
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		
+		alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
