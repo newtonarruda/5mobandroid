@@ -10,7 +10,7 @@ import android.util.Log;
 public class Sms 
 {
 	
-	private static final String CATEGORIA = "handsOn" ;
+	private static final String CATEGORIA = "FINANCAS_SMS" ;
 
 	// Envia um sms para o numero indicado
 	public void enviarSms( Context context, String destino, String mensagem )
@@ -18,11 +18,8 @@ public class Sms
 		try
 		{
 			SmsManager smsManager = SmsManager.getDefault( ) ;
-
 			PendingIntent pIntent = PendingIntent.getBroadcast( context, 0, new Intent( ), 0 ) ;
-
 			smsManager.sendTextMessage( destino, null, mensagem, pIntent, null ) ;
-
 		}
 		catch (Exception e)
 		{
