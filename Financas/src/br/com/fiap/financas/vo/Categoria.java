@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class Categoria implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3520198485095340639L;
 	private Integer idCategoria;
 	private String descricao;

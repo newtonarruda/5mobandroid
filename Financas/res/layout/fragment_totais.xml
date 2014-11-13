@@ -1,109 +1,122 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFFFF"
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/graficoTotalLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/totalLayout" >
+        android:background="#FFFFFFFF" >
 
-        <ImageView
-            android:id="@+id/graficoTotal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerInParent="true"
-            android:background="@drawable/ic_launcher"
-            android:contentDescription="@string/hello_world" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/graficoTotalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/totalLayout" >
 
-    <LinearLayout
-        android:id="@+id/totalLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:baselineAligned="false"
-        android:orientation="horizontal" >
+            <ImageView
+                android:id="@+id/graficoTotal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_launcher"
+                android:contentDescription="@string/hello_world" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/moving_view_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/totalLayout"
+            android:text="@string/app_name" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/totalLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/TotalGanhos"
-                android:textColor="#FF000000" />
-
-            <TextView
-                android:id="@+id/totalGanhosLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/TotalGastos"
-                android:textColor="#FF000000" />
+            android:id="@+id/totalLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/totalGastosLabel"
+                    android:id="@+id/totalLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Saldo"
+                    android:text="@string/TotalGanhos"
                     android:textColor="#FF000000" />
 
                 <TextView
+                    android:id="@+id/totalGanhosLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/abreParentesis"
+                    android:text="@string/TotalGastos"
                     android:textColor="#FF000000" />
 
-                <TextView
-                    android:id="@+id/porcentagemSaldoLabel"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FF000000" />
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/totalGastosLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Saldo"
+                        android:textColor="#FF000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/abreParentesis"
+                        android:textColor="#FF000000" />
+
+                    <TextView
+                        android:id="@+id/porcentagemSaldoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fechaParentesis"
+                        android:textColor="#FF000000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="vertical" >
 
                 <TextView
+                    android:id="@+id/totalGanhoText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fechaParentesis"
-                    android:textColor="#FF000000" />
+                    android:layout_height="wrap_content" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/totalGastoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/totalSaldoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </TextView>
             </LinearLayout>
         </LinearLayout>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/totalGanhoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/totalGastoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/totalSaldoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
-        </LinearLayout>
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
