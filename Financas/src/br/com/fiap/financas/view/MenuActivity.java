@@ -163,12 +163,17 @@ public class MenuActivity extends Activity {
 	 */
 	public void scheduleAlarmSMS(View v)
 	{
+		//TODO não deixar esse método ser uma action, tem que ser um broadcast para gerar o evento
+		
+		//http://www.learn-android-easily.com/2013/06/scheduling-task-using-alarm-manager.html
+		//TODO Organizar o getTimeInMillis para todos os dias as 8h
 		Long time = new GregorianCalendar().getTimeInMillis();
 		
 		Intent intentAlarm = new Intent(this, SmsReceiver.class);
 		
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		
+		//TODO Select com a base de dados para pegar os ganhos e gastos
 		alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
         Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 	}
