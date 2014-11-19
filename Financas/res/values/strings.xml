@@ -24,7 +24,7 @@
     <string name="excluir_dados">Excluir Dados</string>
     <string name="informacoes">Informações</string>
     <string name="Integrante1">RM 46882 - Newton Arruda</string>
-    <string name="Integrante2">RM ##### - Caio</string>
+    <string name="Integrante2">RM 46475 - Caio</string>
     <string name="Integrante3">RM ##### - Mauricio</string>
     <string name="rodape">Informações de rodapé</string>
     <string name="titulo_activity_menu">Menu Finanças</string>
@@ -43,5 +43,8 @@
     <string name="abreParentesis">(</string>
     <string name="fechaParentesis">)</string>
     <string name="title_activity_financas">Financas</string>
+    <string name="titulo_activity_categorias">Lista de Categorias</string>
+    <string name="CATEGORIAS">CATEGORIAS</string>
+    <string name="mais">+</string>
 
 </resources>
