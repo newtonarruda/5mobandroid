@@ -146,8 +146,11 @@ public class MenuActivity extends Activity {
 			// Exibir caixa de diálogo com os integrantes do grupo
 			AlertDialog.Builder build = new AlertDialog.Builder(context);
 			build.setTitle("");
-			build.setMessage("Integrantes do Projeto:\n" + "Caio Waquil\n"
-					+ "Mauricio Frasson\n" + "Newton Arruda");
+			build.setMessage("Integrantes WAFF Finanças:\n" 
+					+ "Caio Waquil\n"
+					+ "Mauricio Frasson\n" 
+					+ "Newton Arruda\n "
+					+ "Ronaldo Faraone");
 			build.setIcon(R.drawable.money_bag);
 			build.show();
 		}
@@ -159,27 +162,6 @@ public class MenuActivity extends Activity {
 
 	private void trace(String msg) {
 		toast(msg);
-	}
-
-	/*
-	 * Método que irá disparar o SMS no horario pré-determinado,
-	 * Regra: Todos os dias as 8h 
-	 */
-	public void scheduleAlarmSMS(View v)
-	{
-		//TODO não deixar esse método ser uma action, tem que ser um broadcast para gerar o evento
-		
-		//http://www.learn-android-easily.com/2013/06/scheduling-task-using-alarm-manager.html
-		//TODO Organizar o getTimeInMillis para todos os dias as 8h
-		Long time = new GregorianCalendar().getTimeInMillis();
-		
-		Intent intentAlarm = new Intent(this, SmsReceiver.class);
-		
-		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		
-		//TODO Select com a base de dados para pegar os ganhos e gastos
-		alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-        Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override

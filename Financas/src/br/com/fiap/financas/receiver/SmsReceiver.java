@@ -14,10 +14,7 @@ import br.com.fiap.financas.util.Sms;
  */
 public class SmsReceiver extends BroadcastReceiver
 {
-
 	private static final String CATEGORIA = "FINANCAS_SMS_RECEIVER" ;
-	final SmsManager smsMan = SmsManager.getDefault();
-	
 	
 	@Override
 	public void onReceive( Context context, Intent intent )

@@ -6,9 +6,6 @@ import java.util.Date;
 
 public class Movimentacao implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1578418401304728690L;
 
 	private Integer idMovimentacao;
