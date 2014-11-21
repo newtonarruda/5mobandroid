@@ -1,19 +1,13 @@
 package br.com.fiap.financas.util;
 
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 import br.com.fiap.financas.dao.MovimentacaoDAO;
 import br.com.fiap.financas.dao.UsuarioDAO;
-import br.com.fiap.financas.vo.Movimentacao;
-import br.com.fiap.financas.vo.Origem;
 import br.com.fiap.financas.vo.Usuario;
 
 public class SmsAsync extends AsyncTask<Object, Integer, Void> 
