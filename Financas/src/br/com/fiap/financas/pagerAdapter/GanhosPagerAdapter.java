@@ -1,5 +1,7 @@
 package br.com.fiap.financas.pagerAdapter;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +14,19 @@ import android.widget.TextView;
 import br.com.fiap.financas.R;
 import br.com.fiap.financas.adapter.GanhosAdapter;
 import br.com.fiap.financas.vo.ItemGanho;
+import br.com.fiap.financas.vo.Movimentacao;
 
 public class GanhosPagerAdapter extends InfinitePagerAdapter<Integer> {
 
 	private LayoutInflater inflater;
+	private List<Movimentacao> ganhos;
+	private BigDecimal totalVal;
 
-	public GanhosPagerAdapter(final Integer initValue, LayoutInflater inflater) {
+	public GanhosPagerAdapter(final Integer initValue, LayoutInflater inflater,
+			List<Movimentacao> movimentos) {
 		super(initValue);
 		this.inflater = inflater;
+		this.ganhos = movimentos;
 	}
 
 	@SuppressLint("InflateParams")
@@ -28,7 +35,7 @@ public class GanhosPagerAdapter extends InfinitePagerAdapter<Integer> {
 		final LinearLayout layout = (LinearLayout) inflater.inflate(
 				R.layout.fragment_ganhos, null);
 
-		List<ItemGanho> itens = montaListaTeste();
+		List<ItemGanho> itens = montaLista(ganhos);
 
 		final ListView listView = (ListView) layout
 				.findViewById(R.id.ganhosList);
@@ -37,7 +44,7 @@ public class GanhosPagerAdapter extends InfinitePagerAdapter<Integer> {
 
 		final TextView totalText = (TextView) layout
 				.findViewById(R.id.totalText);
-		totalText.setText("R$3.500,00");
+		totalText.setText("R$" + totalVal.toString());
 
 		final TextView saldoFinalText = (TextView) layout
 				.findViewById(R.id.saldoFinalText);
@@ -73,19 +80,36 @@ public class GanhosPagerAdapter extends InfinitePagerAdapter<Integer> {
 	}
 
 	// TODO Isso vai pro saco eh só pro teste!!!
-	private List<ItemGanho> montaListaTeste() {
+	// private List<ItemGanho> montaListaTeste() {
+	// List<ItemGanho> itemGanhos = new ArrayList<ItemGanho>();
+	// for (int i = 0; i < 6; i++) {
+	// ItemGanho itemGanho = new ItemGanho();
+	// itemGanho.setIconeCor(R.drawable.ic_launcher);
+	// itemGanho.setTitulo("Poupança");
+	// itemGanho.setValor("R$2.000,00");
+	// itemGanho.setData("Dom - 01/12/13");
+	// itemGanho.setSaldo("R$2.000,00");
+	// itemGanho.setIconeSaldo(R.drawable.ic_launcher);
+	// itemGanhos.add(itemGanho);
+	// }
+	// return itemGanhos;
+	// }
+
+	private List<ItemGanho> montaLista(List<Movimentacao> ganhos) {
 		List<ItemGanho> itemGanhos = new ArrayList<ItemGanho>();
-		for (int i = 0; i < 6; i++) {
-			ItemGanho itemGanho = new ItemGanho();
-			itemGanho.setIconeCor(R.drawable.ic_launcher);
-			itemGanho.setTitulo("Poupança");
-			itemGanho.setValor("R$2.000,00");
-			itemGanho.setData("Dom - 01/12/13");
-			itemGanho.setSaldo("R$2.000,00");
-			itemGanho.setIconeSaldo(R.drawable.ic_launcher);
-			itemGanhos.add(itemGanho);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy");
+		totalVal = new BigDecimal(0);
+		for (Movimentacao mov : ganhos) {
+			ItemGanho iGanho = new ItemGanho();
+			iGanho.setIconeCor(R.drawable.ic_launcher);
+			iGanho.setTitulo(mov.getTitulo());
+			iGanho.setValor(mov.getValorTotal().toString());
+			iGanho.setData(sdf.format(mov.getData()));
+			iGanho.setSaldo(mov.getValorParcial().toString());
+			iGanho.setIconeSaldo(R.drawable.ic_launcher);
+			itemGanhos.add(iGanho);
+			totalVal.add(mov.getValorTotal());
 		}
 		return itemGanhos;
 	}
-
 }

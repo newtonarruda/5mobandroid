@@ -1,7 +1,10 @@
 package br.com.fiap.financas.dao;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import br.com.fiap.financas.vo.Movimentacao;
 import br.com.fiap.financas.vo.Origem;
 import br.com.fiap.financas.vo.Usuario;
 
+@SuppressWarnings("unused")
 public class MovimentacaoDAO extends DataSource {
 
 	private SQLiteStatement insertStmt;
@@ -30,14 +34,34 @@ public class MovimentacaoDAO extends DataSource {
 			+ " where id = ?";
 
 	// private SQLiteStatement selectLoginStmt;
-	private static final String SELECT_ALL = "select id, titulo, tipo_movimentacao, data, valor_total, valor_parcial, lat_long, flag_efetivada, id_origem, id_usuario from "
+	private static final String SELECT_ALL = "select id_movimentacao, titulo, tipo_movimentacao, data, valor_total, valor_parcial, lat_long, flag_efetivada, id_origem, id_usuario from "
 			+ TABLE_MOVIMENTACAO;
+
+	private SQLiteStatement selectAllGanhosStmt;
+	private static final String SELECT_ALL_GANHOS = "select id_movimentacao, titulo, data, valor_total, valor_parcial, id_origem from "
+			+ TABLE_MOVIMENTACAO
+			+ " where id_usuario = ? and tipo_movimentacao = ? and data >= ? and data <= ?";
+
+	private SQLiteStatement selectAllGastosStmt;
+	private static final String SELECT_ALL_GASTOS = "select id_movimentacao, titulo, data, valor_total, valor_parcial, id_origem from "
+			+ TABLE_MOVIMENTACAO
+			+ " where id_usuario = ? and tipo_movimentacao = ? and data >= ? and data <= ?";;
+
+	// Select SUM com filtro no tipo_movimentacao
+	private SQLiteStatement selectSumGastosOuGanhosStmt;
+	private static final String SELECT_ALL_SUM = "select SUM(valor_total) from "
+			+ TABLE_MOVIMENTACAO
+			+ " where id_usuario = ? and tipo_movimentacao = ? and flag_efetivada = ?";
 
 	public MovimentacaoDAO(Context context) {
 		super(context);
 		this.db = getWritableDatabase();
 		// this.insertStmt = this.db.compileStatement(INSERT);
 		// this.selectLoginStmt = this.db.compileStatement(SELECT_LOGIN);
+		this.selectAllGanhosStmt = this.db.compileStatement(SELECT_ALL_GANHOS);
+		this.selectAllGastosStmt = this.db.compileStatement(SELECT_ALL_GASTOS);
+		this.selectSumGastosOuGanhosStmt = this.db
+				.compileStatement(SELECT_ALL_SUM);
 	}
 
 	public long insert(Movimentacao movimentacao) {
@@ -58,7 +82,7 @@ public class MovimentacaoDAO extends DataSource {
 
 	public List<Movimentacao> selectAll(Usuario usuario) {
 		List<Movimentacao> resultado = new ArrayList<Movimentacao>();
-		Cursor cursor = this.db.query(TABLE_CATEGORIA, new String[] {
+		Cursor cursor = this.db.query(TABLE_MOVIMENTACAO, new String[] {
 				"id_movimentacao", "titulo", "tipo_movimentacao", "data",
 				"valor_total", "valor_parcial", "lat_long", "flag_efetivada",
 				"id_origem", "id_usuario" }, null, null, null, null,
@@ -90,4 +114,110 @@ public class MovimentacaoDAO extends DataSource {
 		}
 		return resultado;
 	}
+
+	public List<Movimentacao> selectAllGanhos(Usuario usuario, Integer indicator) {
+		List<Movimentacao> resultado = new ArrayList<Movimentacao>();
+
+		String dataInicial = montaData(true, indicator);
+		String dataFinal = montaData(false, indicator);
+		String tipoMovimentacao = "1";
+
+		Cursor c = db.rawQuery(SELECT_ALL_GANHOS, new String[] {
+				usuario.getIdUsuario().toString(), tipoMovimentacao,
+				dataInicial, dataFinal });
+		if (c.moveToFirst()) {
+			do {
+				Integer id = c.getInt(c.getColumnIndex("id_movimentcao"));
+				String titulo = c.getString(c.getColumnIndex("titulo"));
+				Date data = null;
+				try {
+					data = new SimpleDateFormat("dd/MM/yyyy").parse(c
+							.getString(c.getColumnIndex("data")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				BigDecimal valorTotal = new BigDecimal(c.getDouble(c
+						.getColumnIndex("valor_total")));
+				BigDecimal valorParcial = new BigDecimal(c.getDouble(c
+						.getColumnIndex("valor_parcial")));
+				Origem origem = new Origem(c.getInt(c
+						.getColumnIndex("id_origem")), null);
+				resultado
+						.add(new Movimentacao(id, titulo, null, data,
+								valorTotal, valorParcial, null, false, origem,
+								usuario));
+			} while (c.moveToNext());
+		}
+		c.close();
+		return resultado;
+	}
+
+	private String montaData(boolean inicial, Integer indicator) {
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + indicator);
+		if (inicial) {
+			calendar.set(Calendar.DAY_OF_MONTH,
+					calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+		} else {
+			calendar.set(Calendar.DAY_OF_MONTH,
+					calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		}
+		return sdf.format(calendar.getTime());
+	}
+
+	public List<Movimentacao> selectAllGastos(Usuario usuario, Integer indicator) {
+		List<Movimentacao> resultado = new ArrayList<Movimentacao>();
+
+		String dataInicial = montaData(true, indicator);
+		String dataFinal = montaData(false, indicator);
+		String tipoMovimentacao = "2";
+
+		Cursor c = db.rawQuery(SELECT_ALL_GASTOS, new String[] {
+				usuario.getIdUsuario().toString(), tipoMovimentacao,
+				dataInicial, dataFinal });
+		if (c.moveToFirst()) {
+			do {
+				Integer id = c.getInt(c.getColumnIndex("id_movimentcao"));
+				String titulo = c.getString(c.getColumnIndex("titulo"));
+				Date data = null;
+				try {
+					data = new SimpleDateFormat("dd/MM/yyyy").parse(c
+							.getString(c.getColumnIndex("data")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				BigDecimal valorTotal = new BigDecimal(c.getDouble(c
+						.getColumnIndex("valor_total")));
+				BigDecimal valorParcial = new BigDecimal(c.getDouble(c
+						.getColumnIndex("valor_parcial")));
+				Origem origem = new Origem(c.getInt(c
+						.getColumnIndex("id_origem")), null);
+				resultado
+						.add(new Movimentacao(id, titulo, null, data,
+								valorTotal, valorParcial, null, false, origem,
+								usuario));
+			} while (c.moveToNext());
+		}
+		c.close();
+		return resultado;
+	}
+
+	public Double selectAllSum(Usuario user, String tipo_movimentacao) {
+		Double _resultSum = 0.0d;
+
+		Cursor c = db.rawQuery(SELECT_ALL_SUM, new String[] {
+				user.getIdUsuario().toString(), tipo_movimentacao, "S" });
+		if (c.moveToFirst()) {
+			_resultSum = c.getDouble(0);
+		} else {
+			_resultSum = -1.0d;
+		}
+
+		if (c != null && !c.isClosed()) {
+			c.close();
+		}
+		return _resultSum;
+	}
+
 }

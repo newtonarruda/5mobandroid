@@ -16,13 +16,6 @@
             android:divider="#FFECECEC"
             android:dividerHeight="2sp" />
 
-        <TextView
-            android:id="@+id/moving_view_x"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/gastosList"
-            android:text="@string/app_name" />
-
         <LinearLayout
             android:id="@+id/totalGastosLayout"
             android:layout_width="fill_parent"

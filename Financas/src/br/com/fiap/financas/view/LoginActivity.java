@@ -1,11 +1,9 @@
 package br.com.fiap.financas.view;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import br.com.fiap.financas.R;
 import br.com.fiap.financas.dao.UsuarioDAO;
-import br.com.fiap.financas.util.ServiceUtil;
 import br.com.fiap.financas.vo.Usuario;
 
 public class LoginActivity extends Activity {
@@ -21,13 +18,12 @@ public class LoginActivity extends Activity {
 
 	Intent intentMyService;
 	ComponentName service;
-	
-	
+
 	EditText etUsuario;
 	EditText etSenha;
 	Button btLogin;
 	Button btNovoUsuario;
-	
+
 	UsuarioDAO dao;
 	Integer loginTentativas = 0;
 
@@ -38,10 +34,6 @@ public class LoginActivity extends Activity {
 		try {
 			setContentView(R.layout.activity_login);
 
-			// Cria um serviço para envio do SMS
-			intentMyService = new Intent(this, ServiceUtil.class);
-			service = startService(intentMyService);
-			
 			etUsuario = (EditText) findViewById(R.id.etUsuario);
 			etSenha = (EditText) findViewById(R.id.etSenha);
 
@@ -62,14 +54,14 @@ public class LoginActivity extends Activity {
 						"Banco de dados não foi inicializado!!!",
 						Toast.LENGTH_LONG).show();
 			}
-			
+
 		} catch (Exception e) {
 			Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG)
 					.show();
 		}
 
 	}
-	
+
 	private void executaCargaInicial() {
 		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", "",
 				0d, true);

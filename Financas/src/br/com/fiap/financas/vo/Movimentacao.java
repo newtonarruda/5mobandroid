@@ -37,6 +37,9 @@ public class Movimentacao implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Movimentacao() {
+	}
+
 	public Integer getIdMovimentacao() {
 		return idMovimentacao;
 	}
