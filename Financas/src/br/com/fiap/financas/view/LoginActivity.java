@@ -70,7 +70,7 @@ public class LoginActivity extends Activity {
 	
 	private void executaCargaInicial() {
 		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", "",
-				0d, true);
+				"000000000", true);
 
 		if (dao.selectLogin(admin) == null) {
 			dao.insert(admin);
@@ -154,7 +154,7 @@ public class LoginActivity extends Activity {
 
 				myData.putSerializable("usuario", usuario);
 				intentLoginToNovoUsuario.putExtras(myData);
-
+				
 				startActivity(intentLoginToNovoUsuario);
 
 				break;

@@ -97,7 +97,7 @@ public class NovoUsuarioActivity extends Activity {
 		usuario.setUsuario(etUsuario.getText().toString());
 		usuario.setSenha(etSenha.getText().toString());
 		usuario.setEmail(etEmail.getText().toString());
-		usuario.setTelefone(etTelefone.getText().toString().isEmpty() ? null : Double.valueOf(etTelefone.getText().toString()));
+		usuario.setTelefone(etTelefone.getText().toString()); //  .isEmpty() ? null : Double.valueOf(etTelefone.getText().toString()));
 	}
 	
 	private void fillForm(){
@@ -106,7 +106,7 @@ public class NovoUsuarioActivity extends Activity {
 		etUsuario.setText(usuario.getUsuario());
 		etSenha.setText(usuario.getSenha());
 		etEmail.setText(usuario.getEmail());
-		etTelefone.setText(usuario.getTelefone() == null ? "" : usuario.getTelefone().toString());
+		etTelefone.setText(usuario.getTelefone()); // == null ? "" : usuario.getTelefone().toString());
 	}
 	
 	private boolean validate(){
@@ -129,7 +129,7 @@ public class NovoUsuarioActivity extends Activity {
 			mensagens.append("Informe o E-mail do Usuário\n");
 			retorno = false;
 		}
-		if(usuario.getTelefone() == null || usuario.getTelefone() == 0){
+		if(usuario.getTelefone() == null || usuario.getTelefone().isEmpty()){
 			mensagens.append("Informe o Telefone do Usuário\n");
 			retorno = false;
 		}

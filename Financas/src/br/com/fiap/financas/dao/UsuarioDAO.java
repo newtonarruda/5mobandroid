@@ -42,7 +42,7 @@ public class UsuarioDAO extends DataSource {
 		this.insertStmt.bindString(2, usuario.getUsuario());
 		this.insertStmt.bindString(3, usuario.getSenha());
 		this.insertStmt.bindString(4, usuario.getEmail());
-		this.insertStmt.bindDouble(5, usuario.getTelefone());
+		this.insertStmt.bindString(5, usuario.getTelefone());
 		// TODO: Implementar Enum para SIM/NÃO
 		this.insertStmt.bindString(6, usuario.isFlagAtivo() ? "S" : "N");
 		return this.insertStmt.executeInsert();
@@ -59,7 +59,7 @@ public class UsuarioDAO extends DataSource {
 									c.getString(c.getColumnIndex("usuario")), 
 									c.getString(c.getColumnIndex("senha")), 
 									c.getString(c.getColumnIndex("email")), 
-									c.getDouble(c.getColumnIndex("telefone")),
+									c.getString(c.getColumnIndex("telefone")),
 									c.getString(c.getColumnIndex("flag_ativo")).equalsIgnoreCase("S") ? true : false);
 		}
 		c.close();
@@ -78,7 +78,7 @@ public class UsuarioDAO extends DataSource {
 					c.getString(c.getColumnIndex("usuario")), 
 					c.getString(c.getColumnIndex("senha")), 
 					c.getString(c.getColumnIndex("email")), 
-					c.getDouble(c.getColumnIndex("telefone")), 
+					c.getString(c.getColumnIndex("telefone")), 
 					c.getString(c.getColumnIndex("flag_ativo")).equalsIgnoreCase("S") ? true : false);
 		}
 		c.close();

@@ -18,7 +18,6 @@ import br.com.fiap.financas.vo.Usuario;
 
 public class SmsAsync extends AsyncTask<Object, Integer, Void> 
 {
-
 	Sms sendMessage;
 
 	UsuarioDAO daoUsuario;
@@ -36,10 +35,8 @@ public class SmsAsync extends AsyncTask<Object, Integer, Void>
 	{
 		Context context = (Context) params[0];
 
-//		Usuario _returnUser;
 		Double _returnSumGanho;
 		Double _returnSumGasto;
-		String _celphone;
 		
 		Calendar today = Calendar.getInstance();
 		int hour = today.get(Calendar.HOUR_OF_DAY);
@@ -50,22 +47,18 @@ public class SmsAsync extends AsyncTask<Object, Integer, Void>
 		{
 			// Não estou considerando 8h para evitar possíveis atrasos de rede da operadora
 			if (hour == 7) {
-				if (minuts >= 59 & seconds > 30) {
+				if (minuts >= 58 & seconds > 30) {
 					sendMessage = new Sms();
 
-					// Para teste
-					//insertMovimentacao(user);
-					
-					// Limpa sujeira do Double
-					_celphone = user.getTelefone().toString().replace(".", "").substring(0, 9);
-					
 					_returnSumGanho = daoMovimentacao.selectAllSum(user, "1");
 					_returnSumGasto = daoMovimentacao.selectAllSum(user, "2");
 
 					sendMessage.enviarSms(context, 
 							//user.getTelefone().toString(), 
-							_celphone,
-							"Saldo diário R$" + calcSumGanhoEGastos(_returnSumGanho, _returnSumGasto));
+							user.getTelefone(),
+							"Sr. " + user.getNome() 
+							+ ". Saldo diário R$" 
+							+ calcSumGanhoEGastos(_returnSumGanho, _returnSumGasto));
 				}
 			} else {
 				// 30s = 30000 Sleep every 30 seconds
@@ -103,57 +96,57 @@ public class SmsAsync extends AsyncTask<Object, Integer, Void>
 	}
 
 	// RETIRAR ONLY FOR TEST- VALIDAÇÃO DE DATABASEs
-	private void insertMovimentacao(Usuario user)
-	{	
-
-		daoMovimentacao.insert(new Movimentacao(
-				2, 
-				"Ganhador do grande premio", 
-				1, 
-				new Date(),
-				new BigDecimal("50000.0"), 
-				new BigDecimal("0.0"), 
-				"0.0, 0,0", 
-				true, 
-				new Origem(1, "Loteria"), 
-				user));
-
-		daoMovimentacao.insert(new Movimentacao(
-				3, 
-				"Divida de lorota", 
-				2, 
-				new Date(), 
-				new BigDecimal("20.0"), 
-				new BigDecimal("0.0"), 
-				"0.0, 0,0", 
-				true, 
-				new Origem(2, "Divida"), 
-				user));
-
-		daoMovimentacao.insert(new Movimentacao(
-				4, 
-				"Bonificao Salarial", 
-				1, 
-				new Date(), 
-				new BigDecimal("10000.0"), 
-				new BigDecimal("0.0"), 
-				"0.0, 0,0", 
-				true, 
-				new Origem(3, "Salario"), 
-				user));
-
-		daoMovimentacao.insert(new Movimentacao(
-				5, 
-				"Conta de luz", 
-				1, 
-				new Date(), 
-				new BigDecimal("280.0"), 
-				new BigDecimal("0.0"), 
-				"0.0, 0,0", 
-				true, 
-				new Origem(4, "Conta"), 
-				user));
-	}
+//	private void insertMovimentacao(Usuario user)
+//	{	
+//
+//		daoMovimentacao.insert(new Movimentacao(
+//				2, 
+//				"Ganhador do grande premio", 
+//				1, 
+//				new Date(),
+//				new BigDecimal("50000.0"), 
+//				new BigDecimal("0.0"), 
+//				"0.0, 0,0", 
+//				true, 
+//				new Origem(1, "Loteria"), 
+//				user));
+//
+//		daoMovimentacao.insert(new Movimentacao(
+//				3, 
+//				"Divida de lorota", 
+//				2, 
+//				new Date(), 
+//				new BigDecimal("20.0"), 
+//				new BigDecimal("0.0"), 
+//				"0.0, 0,0", 
+//				true, 
+//				new Origem(2, "Divida"), 
+//				user));
+//
+//		daoMovimentacao.insert(new Movimentacao(
+//				4, 
+//				"Bonificao Salarial", 
+//				1, 
+//				new Date(), 
+//				new BigDecimal("10000.0"), 
+//				new BigDecimal("0.0"), 
+//				"0.0, 0,0", 
+//				true, 
+//				new Origem(3, "Salario"), 
+//				user));
+//
+//		daoMovimentacao.insert(new Movimentacao(
+//				5, 
+//				"Conta de luz", 
+//				1, 
+//				new Date(), 
+//				new BigDecimal("280.0"), 
+//				new BigDecimal("0.0"), 
+//				"0.0, 0,0", 
+//				true, 
+//				new Origem(4, "Conta"), 
+//				user));
+//	}
 
 	@Override
 	protected Void doInBackground(Object... params) {

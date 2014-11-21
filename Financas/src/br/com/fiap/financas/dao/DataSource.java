@@ -32,7 +32,7 @@ public class DataSource extends SQLiteOpenHelper {
 
 		db.execSQL("CREATE TABLE "
 				+ TABLE_USUARIO
-				+ " (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, usuario TEXT, senha TEXT, email TEXT, telefone REAL, flag_ativo VARCHAR)");
+				+ " (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, usuario TEXT, senha TEXT, email TEXT, telefone TEXT, flag_ativo VARCHAR)");
 
 		db.execSQL("CREATE TABLE "
 				+ TABLE_MOVIMENTACAO
