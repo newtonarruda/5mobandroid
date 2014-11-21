@@ -33,11 +33,18 @@ public class MovimentacaoDAO extends DataSource {
 	private static final String SELECT_ALL = "select id, titulo, tipo_movimentacao, data, valor_total, valor_parcial, lat_long, flag_efetivada, id_origem, id_usuario from "
 			+ TABLE_MOVIMENTACAO;
 
+	// Select SUM com filtro no tipo_movimentacao 
+	private SQLiteStatement selectSumGastosOuGanhosStmt;
+	private static final String SELECT_ALL_SUM = "select SUM(valor_total) from " 
+			+ TABLE_MOVIMENTACAO 
+			+ " where id_usuario = ? and tipo_movimentacao = ? and flag_efetivada = ?";
+	
 	public MovimentacaoDAO(Context context) {
 		super(context);
 		this.db = getWritableDatabase();
-		// this.insertStmt = this.db.compileStatement(INSERT);
+		this.insertStmt = this.db.compileStatement(INSERT);
 		// this.selectLoginStmt = this.db.compileStatement(SELECT_LOGIN);
+		this.selectSumGastosOuGanhosStmt = this.db.compileStatement(SELECT_ALL_SUM);
 	}
 
 	public long insert(Movimentacao movimentacao) {
@@ -89,5 +96,27 @@ public class MovimentacaoDAO extends DataSource {
 			cursor.close();
 		}
 		return resultado;
+	}
+	
+	public Double selectAllSum(Usuario user, String tipo_movimentacao)
+	{
+		Double _resultSum = 0.0d;
+		
+		Cursor c = db.rawQuery(SELECT_ALL_SUM,
+				new String[ ] { user.getIdUsuario().toString(), tipo_movimentacao, "S" } ) ;
+		if( c.moveToFirst())
+		{
+			_resultSum = c.getDouble( 0 );
+		} 
+		else 
+		{
+			_resultSum = -1.0d;
+		}
+		
+		if (c != null && !c.isClosed())
+		{
+			c.close();
+		}
+		return _resultSum;
 	}
 }
