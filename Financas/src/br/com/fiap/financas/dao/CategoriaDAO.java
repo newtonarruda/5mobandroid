@@ -38,7 +38,7 @@ public class CategoriaDAO extends DataSource {
 	}
 
 	// Diferente do Select do Login
-	public List<Categoria> selectAll(Categoria categoria) {
+	public List<Categoria> selectAll() {
 		List<Categoria> resultado = new ArrayList<Categoria>();
 		Cursor cursor = this.db.query(TABLE_CATEGORIA,
 				new String[] { "descricao" }, null, null, null, null,

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.fiap.financas.R;
+import br.com.fiap.financas.adapter.ListaCategoriaAdapter;
 import br.com.fiap.financas.receiver.SmsReceiver;
 import br.com.fiap.financas.vo.Usuario;
 
@@ -109,7 +110,10 @@ public class MenuActivity extends Activity {
 			switch (view.getId()) {
 
 			case R.id.ivCategorias:
-				trace("Abre Categorias");
+				// Tela ListaCategoriasActivity
+				Intent intent = new Intent(getBaseContext(),
+						CategoriasActivity.class);
+				startActivity(intent);
 			}
 		}
 	}

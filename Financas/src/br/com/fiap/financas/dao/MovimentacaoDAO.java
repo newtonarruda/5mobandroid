@@ -56,7 +56,7 @@ public class MovimentacaoDAO extends DataSource {
 	public MovimentacaoDAO(Context context) {
 		super(context);
 		this.db = getWritableDatabase();
-		// this.insertStmt = this.db.compileStatement(INSERT);
+		this.insertStmt = this.db.compileStatement(INSERT);
 		// this.selectLoginStmt = this.db.compileStatement(SELECT_LOGIN);
 		this.selectAllGanhosStmt = this.db.compileStatement(SELECT_ALL_GANHOS);
 		this.selectAllGastosStmt = this.db.compileStatement(SELECT_ALL_GASTOS);
@@ -219,5 +219,4 @@ public class MovimentacaoDAO extends DataSource {
 		}
 		return _resultSum;
 	}
-
 }

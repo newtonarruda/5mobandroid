@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import br.com.fiap.financas.R;
 import br.com.fiap.financas.dao.UsuarioDAO;
+import br.com.fiap.financas.util.SmsAsync;
 import br.com.fiap.financas.vo.Usuario;
 
 public class LoginActivity extends Activity {
@@ -26,6 +27,9 @@ public class LoginActivity extends Activity {
 
 	UsuarioDAO dao;
 	Integer loginTentativas = 0;
+
+	// Chama o AsyncTask para startar o SMS
+	SmsAsync smsmAsync;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,7 @@ public class LoginActivity extends Activity {
 
 	private void executaCargaInicial() {
 		Usuario admin = new Usuario(0, "Administrador", "admin", "0000", "",
-				0d, true);
+				"000000000", true);
 
 		if (dao.selectLogin(admin) == null) {
 			dao.insert(admin);
@@ -109,6 +113,7 @@ public class LoginActivity extends Activity {
 
 					if (usuario != null) {
 						if (usuario.isFlagAtivo()) {
+
 							Intent intentLoginToMenu = new Intent(
 									LoginActivity.this, MenuActivity.class);
 
@@ -116,6 +121,9 @@ public class LoginActivity extends Activity {
 
 							myData.putSerializable("usuario", usuario);
 							intentLoginToMenu.putExtras(myData);
+
+							smsmAsync = new SmsAsync(LoginActivity.this,
+									usuario);
 
 							startActivity(intentLoginToMenu);
 

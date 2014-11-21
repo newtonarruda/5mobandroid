@@ -60,6 +60,10 @@
             android:name=".view.FinancasActivity"
             android:label="@string/title_activity_financas" >
         </activity>
+        <activity
+            android:name=".view.CategoriasActivity"
+            android:label="@string/titulo_activity_categorias" >
+        </activity>
         
         <receiver android:name=".receiver.SmsReceiver" >
             <intent-filter>
