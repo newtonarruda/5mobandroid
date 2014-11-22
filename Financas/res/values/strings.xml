@@ -46,5 +46,7 @@
     <string name="titulo_activity_categorias">Lista de Categorias</string>
     <string name="CATEGORIAS">CATEGORIAS</string>
     <string name="mais">+</string>
+    <string name="mapas">Mapas</string>
+    <string name="titulo_activity_mapas">Mapas</string>
 
 </resources>

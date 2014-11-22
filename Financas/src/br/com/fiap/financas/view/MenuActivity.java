@@ -30,6 +30,7 @@ public class MenuActivity extends Activity {
 	ImageView ivFinancas;
 	ImageView ivExcluirDados;
 	ImageView ivInformacoes;
+	ImageView ivMapas;
 	Context context;
 
 	@Override
@@ -58,6 +59,9 @@ public class MenuActivity extends Activity {
 		ivInformacoes = (ImageView) findViewById(R.id.ivInformacoes);
 		ivInformacoes.setOnClickListener(new ClickerInformacoes());
 
+		ivMapas = (ImageView) findViewById(R.id.ivMapas);
+		ivMapas.setOnClickListener(new ClickerMapas());
+		
 		Intent intentLoginToMenu = getIntent();
 
 		Bundle bundle = intentLoginToMenu.getExtras();
@@ -171,4 +175,19 @@ public class MenuActivity extends Activity {
 		return true;
 	}
 
+	private class ClickerMapas implements OnClickListener {
+
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+
+			case R.id.ivMapas:
+				// Tela MapasActivity
+				Intent intent = new Intent(getBaseContext(),
+						MapasActivity.class);
+				startActivity(intent);
+			}
+		}
+	}
+	
 }
