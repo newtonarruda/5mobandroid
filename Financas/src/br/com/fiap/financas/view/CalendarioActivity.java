@@ -30,7 +30,7 @@ public class CalendarioActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendario);
-
+		
 		mes = Calendar.getInstance();
 
 		items = new ArrayList<String>();

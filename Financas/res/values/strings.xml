@@ -35,18 +35,18 @@
     <string name="title_activity_ganhos">Ganhos</string>
     <string name="title_activity_gastos">Gastos</string>
     <string name="title_activity_totais">Totais</string>
-    <string name="Total">Total:</string>
+    <string name="title_activity_categorias">Lista de Categorias</string><string name="title_activity_mapas">Mapas</string><string name="title_activity_financas">Financas</string><string name="Total">Total:</string>
     <string name="Saldo">Saldo:</string>
     <string name="xxx">xxx</string>
     <string name="TotalGanhos">Total ganhos:</string>
     <string name="TotalGastos">Total gastos:</string>
     <string name="abreParentesis">(</string>
     <string name="fechaParentesis">)</string>
-    <string name="title_activity_financas">Financas</string>
-    <string name="titulo_activity_categorias">Lista de Categorias</string>
+    
+    
     <string name="CATEGORIAS">CATEGORIAS</string>
     <string name="mais">+</string>
     <string name="mapas">Mapas</string>
-    <string name="titulo_activity_mapas">Mapas</string>
+    
 
 </resources>

@@ -22,7 +22,7 @@ public class FinancasActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_financas);
-
+		
 		if (null == dao) {
 			dao = new MovimentacaoDAO(this);
 		}

@@ -52,7 +52,8 @@
         </activity>
         <activity
             android:name=".view.CalendarioActivity"
-            android:label="@string/titulo_activity_calendario" >
+            android:label="@string/titulo_activity_calendario"
+            android:parentActivityName="br.com.fiap.financas.view.MenuActivity" >
         </activity>
         <activity
             android:name=".view.GanhosActivity"
@@ -68,15 +69,18 @@
         </activity>
         <activity
             android:name=".view.FinancasActivity"
-            android:label="@string/title_activity_financas" >
+            android:label="@string/title_activity_financas"
+            android:parentActivityName="br.com.fiap.financas.view.MenuActivity" >
         </activity>
         <activity
             android:name=".view.CategoriasActivity"
-            android:label="@string/titulo_activity_categorias" >
+            android:label="@string/title_activity_categorias"
+            android:parentActivityName="br.com.fiap.financas.view.MenuActivity" >
         </activity>
         <activity
             android:name=".view.MapasActivity"
-            android:label="@string/titulo_activity_categorias" >
+            android:label="@string/title_activity_mapas"
+            android:parentActivityName="br.com.fiap.financas.view.MenuActivity" >
         </activity>
         <receiver android:name=".receiver.SmsReceiver" >
             <intent-filter>
